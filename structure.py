@@ -649,7 +649,8 @@ settings_multi_domain = {
      "moncler.com/en-us/" : "schema",
      "us.dolcegabbana.com/" : "schema",
      "loewe.com/usa/en/" : "schema",
-     "versace.com/us/en/" : "schema"
+     "versace.com/us/en/" : "schema",
+     "marcjacobs.com/default/ " : "schema",
 }
 
 
