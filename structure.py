@@ -5,7 +5,7 @@ import json
 import os
 import logging
 import time
-
+DEBUG = False
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
 
@@ -115,7 +115,7 @@ def go_to_target(Target_URL, max_retries=5):
         
     headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5pa0BsdXh1cnltYXJrZXQuY29tIiwiaXNfc3lzX2FkbWluIjpmYWxzZSwiYWNjb3VudF9uYW1lIjoibHV4dXJ5X21hcmtldCIsImFjY291bnRfZ3VpZCI6IjIxYjBiZmZhMmZmMzRlM2ZiODAxMjIzYWExMmQ0YzdjIiwicm9sZSI6ImFkbWluIiwibmFtZSI6Im5payBwb3BvdiIsImV4cCI6MTY5ODQ0MTk5OCwiaWF0IjoxNjk4MTgyNzk4LCJpc3MiOiJhcGkubmltYmxld2F5LmNvbSJ9.p9hkcaOzpvgAYFUyKCOYRWnZQu65XX5_6AiqFVszRss',
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5pa0BsdXh1cnltYXJrZXQuY29tIiwiaXNfc3lzX2FkbWluIjpmYWxzZSwiYWNjb3VudF9uYW1lIjoibHV4dXJ5X21hcmtldCIsImFjY291bnRfZ3VpZCI6IjIxYjBiZmZhMmZmMzRlM2ZiODAxMjIzYWExMmQ0YzdjIiwicm9sZSI6ImFkbWluIiwibmFtZSI6Im5payBwb3BvdiIsImV4cCI6MTY5OTA0MjUzOSwiaWF0IjoxNjk4NzgzMzM5LCJpc3MiOiJhcGkubmltYmxld2F5LmNvbSJ9.zGTlxVpAUSsdl3qtclan8u4Sc_sBb9Ok3eSe9FCgUTE',
       #'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36',
     }
     
@@ -172,7 +172,7 @@ def go_to_cache_results(Cache_URL, max_retries=5):
         
     headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5pa0BsdXh1cnltYXJrZXQuY29tIiwiaXNfc3lzX2FkbWluIjpmYWxzZSwiYWNjb3VudF9uYW1lIjoibHV4dXJ5X21hcmtldCIsImFjY291bnRfZ3VpZCI6IjIxYjBiZmZhMmZmMzRlM2ZiODAxMjIzYWExMmQ0YzdjIiwicm9sZSI6ImFkbWluIiwibmFtZSI6Im5payBwb3BvdiIsImV4cCI6MTY5ODQ0MTk5OCwiaWF0IjoxNjk4MTgyNzk4LCJpc3MiOiJhcGkubmltYmxld2F5LmNvbSJ9.p9hkcaOzpvgAYFUyKCOYRWnZQu65XX5_6AiqFVszRss',
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5pa0BsdXh1cnltYXJrZXQuY29tIiwiaXNfc3lzX2FkbWluIjpmYWxzZSwiYWNjb3VudF9uYW1lIjoibHV4dXJ5X21hcmtldCIsImFjY291bnRfZ3VpZCI6IjIxYjBiZmZhMmZmMzRlM2ZiODAxMjIzYWExMmQ0YzdjIiwicm9sZSI6ImFkbWluIiwibmFtZSI6Im5payBwb3BvdiIsImV4cCI6MTY5OTA0MjUzOSwiaWF0IjoxNjk4NzgzMzM5LCJpc3MiOiJhcGkubmltYmxld2F5LmNvbSJ9.zGTlxVpAUSsdl3qtclan8u4Sc_sBb9Ok3eSe9FCgUTE',
       #'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36',
     }
     
@@ -213,7 +213,7 @@ def google_search(query, max_retries=5):
     })
     headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5pa0BsdXh1cnltYXJrZXQuY29tIiwiaXNfc3lzX2FkbWluIjpmYWxzZSwiYWNjb3VudF9uYW1lIjoibHV4dXJ5X21hcmtldCIsImFjY291bnRfZ3VpZCI6IjIxYjBiZmZhMmZmMzRlM2ZiODAxMjIzYWExMmQ0YzdjIiwicm9sZSI6ImFkbWluIiwibmFtZSI6Im5payBwb3BvdiIsImV4cCI6MTY5ODQ0MTk5OCwiaWF0IjoxNjk4MTgyNzk4LCJpc3MiOiJhcGkubmltYmxld2F5LmNvbSJ9.p9hkcaOzpvgAYFUyKCOYRWnZQu65XX5_6AiqFVszRss'
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5pa0BsdXh1cnltYXJrZXQuY29tIiwiaXNfc3lzX2FkbWluIjpmYWxzZSwiYWNjb3VudF9uYW1lIjoibHV4dXJ5X21hcmtldCIsImFjY291bnRfZ3VpZCI6IjIxYjBiZmZhMmZmMzRlM2ZiODAxMjIzYWExMmQ0YzdjIiwicm9sZSI6ImFkbWluIiwibmFtZSI6Im5payBwb3BvdiIsImV4cCI6MTY5OTA0MjUzOSwiaWF0IjoxNjk4NzgzMzM5LCJpc3MiOiJhcGkubmltYmxld2F5LmNvbSJ9.zGTlxVpAUSsdl3qtclan8u4Sc_sBb9Ok3eSe9FCgUTE'
     }
     retries = 0
     while retries < max_retries:
@@ -357,9 +357,11 @@ def universal_parser(html_content, settings, domain):
     :param domain: String representing the domain for which the parsing should be done.
     :return: Dictionary containing the extracted information.
     """
+    if DEBUG == True:
+        write_to_file("DEBUG.txt", str(html_content))
+    
     # Get the settings for the specified domain
     domain_settings = settings.get(domain, {})
-    
     # If no settings for the domain, return an empty dictionary
     if not domain_settings:
         return {}
@@ -566,8 +568,8 @@ def process_product_ids(product_ids_file, brand_name_file,error_log_file="error_
                 # Write the parsed data to the master JSON file
                     write_to_master_json(parsed_data, product_id, query)
                 else:
-                    cache_body = go_to_cache_results(Target_URL).text
-                    parsed_data = universal_parser(cache_body, settings_multi_domain, domain)
+                    #cache_body = go_to_cache_results(Target_URL).text
+                    #parsed_data = universal_parser(cache_body, settings_multi_domain, domain)
                     write_to_master_json(parsed_data, product_id, query)
 
             else:
@@ -650,9 +652,9 @@ settings_multi_domain = {
      "us.dolcegabbana.com/" : "schema",
      "loewe.com/usa/en/" : "schema",
      "versace.com/us/en/" : "schema",
-     "marcjacobs.com/default/ " : "schema",
+     "marcjacobs.com/default" : "schema",
 }
 
 
 
-process_product_ids("scan_ids.txt", "scan_brands.txt")
+process_product_ids("ids.txt", "brands.txt")

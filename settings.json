@@ -385,10 +385,10 @@
     },
     "expected_length": {
         "base": [
-            12
+            11
         ],
         "with_color": [
-            15
+            14
         ]
     },
     "fallback_format": "base",
