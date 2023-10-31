@@ -365,7 +365,43 @@
     ]
 }
 ,
-
+{
+    "names": [
+        "Marc Jacobs"
+    ],
+    "full_name": "Marc Jacobs",
+    "version": "1.0",
+    "last_updated": "2023-10-31",
+    "is_active": true,
+    "sku_format": {
+      "base": { "article" : ["6"] , "model" : ["6"]
+  
+  },
+        "base_separator": "None",
+        "color_extension": [
+            "3"
+        ],
+        "color_separator": "None"
+    },
+    "expected_length": {
+        "base": [
+            12
+        ],
+        "with_color": [
+            15
+        ]
+    },
+    "fallback_format": "base",
+    "domain_hierarchy": [
+        "marcjacobs.com/default"
+    ],
+    "retry":"",
+    "comments": "Color Unclear",
+    "example_sku": [
+        "2F3HSC053H01"
+    ]
+}
+,
 {
   "names": [
       "Versace","VERSACE"
