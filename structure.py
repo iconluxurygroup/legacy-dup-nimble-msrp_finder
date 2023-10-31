@@ -9,10 +9,19 @@ DEBUG = False
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
 
-# Load settings from JSON file
-logging.info("Loading settings from JSON file...")
-with open("settings.json", "r") as f:
-    settings = json.load(f)
+
+
+def load_settings_separately(*file_paths):
+    all_settings = {}
+    for file_path in file_paths:
+        try:
+            with open(file_path, 'r') as f:
+                settings = json.load(f)
+            key_name = file_path.split('/')[-1].replace('.json', '')  # Extract filename to use as key
+            all_settings[key_name] = settings
+        except Exception as e:
+            all_settings["error"] = str(e)
+    return all_settings
 
 def find_brand_rules(brand_name):
     logging.info(f"Searching for brand rules for {brand_name}...")
@@ -73,7 +82,7 @@ def handle_brand_sku(sku, brand_name):
     logging.error("Invalid SKU format")
     return "Invalid SKU format"
 
-def go_to_target(Target_URL, max_retries=5):
+def go_to_target(Target_URL, delay, max_retries=5):
     """
     Fetch the contents of the target site and retry on specific error codes.
 
@@ -93,8 +102,8 @@ def go_to_target(Target_URL, max_retries=5):
       "locale": "en",     
     })
     
-    if "moncler" in Target_URL:
-        print("Enabling Delay for Moncler")
+    if delay == True:
+        print("Enabling Delay")
         payload = json.dumps({
       "parse": False,
       "url": Target_URL,
@@ -105,7 +114,7 @@ def go_to_target(Target_URL, max_retries=5):
      "render_flow": [
           {
             "wait": {
-                "delay": 5000 ####ONLY FOR MONCLER FIGURE OUT LATER
+                "delay": 8000 ####ONLY FOR MONCLER FIGURE OUT LATER
             }
       
       }]
@@ -336,13 +345,14 @@ def extract_product_schema(html_content):
     #with open('example.txt', 'w', encoding='utf-8') as file:
         # Write some text to the file
        #file.write(str(soup))
-#
+#   
     script_tags = soup.find_all('script', {'type': 'application/ld+json'})
+    
     for script in script_tags:
         try:
             schema_data = json.loads(script.string)
             if schema_data.get('@type') == 'Product':
-                return schema_data
+                return schema_data               
         except json.JSONDecodeError:
             continue
             
@@ -544,6 +554,8 @@ def process_product_ids(product_ids_file, brand_name_file,error_log_file="error_
                 logging.error("Brand not found")
                 return "Brand not found"
             domain = brand_rule['domain_hierarchy'][0]
+            delay = brand_rule['delay']
+            print(f'Delay: {delay}')
             
             print(f'{brand_names[index]} {formatted_sku} {domain}')
             
@@ -559,7 +571,7 @@ def process_product_ids(product_ids_file, brand_name_file,error_log_file="error_
             # Extract the target URL and get its content
             Target_URL = extract_url_from_string(str(filtered_results))
             if Target_URL:
-                target_body = go_to_target(Target_URL).text
+                target_body = go_to_target(Target_URL,delay).text
 
                 # Parse the target page content
                 parsed_data = universal_parser(target_body, settings_multi_domain, domain)
@@ -593,67 +605,16 @@ def process_product_ids(product_ids_file, brand_name_file,error_log_file="error_
 
 
 
-# Hierarchical settings dictionary to support multiple domains/sites
-settings_multi_domain = {
-    "vitkac.com": {
-        "title": {
-            "tag": "span",
-            "id": "w_header",
-            "class": None,
-            "attribute": "text"
-        },
-        "price": {
-            "tag": "p",
-            "id": "prod_price",
-            "class": "price",
-            "attribute": "text",
-            "child": {
-                "tag": "span",
-                "id": "regularPrice"
-            }
-        },
-        "product_id": {
-            "tag": "span",
-            "id": "productSymbol"
-        },
-        "brand": {
-            "tag": "",
-            "identifier": ""
-        },
-        "description": {
-            "tag": "p",
-            "class": "productDescription",
-            "attribute": "text"
-        },
-        "composition": {
-            "tag": "",
-            "identifier": ""
-        },
-"images": {
-    "tag": "a",
-    "multiple": True,
-    "container": {
-        "tag": "article",
-        "id": "photoList"
-    },
-    "attribute": "href"
-}
-
-
-    },
-     "gucci.com/us": "schema",
-     "alexandermcqueen.com/en-us": "schema",
-     "ysl.com/en-us": "schema",
-     "balenciaga.com/en-us": "schema",
-     "bottegaveneta.com/en-us": "schema",
-     "givenchy.com/us/": "schema",   
-     "us.burberry.com" : "schema",   
-     "moncler.com/en-us/" : "schema",
-     "us.dolcegabbana.com/" : "schema",
-     "loewe.com/usa/en/" : "schema",
-     "versace.com/us/en/" : "schema",
-     "marcjacobs.com/default" : "schema",
-}
+#
+## Load settings from JSON file
+#logging.info("Loading settings from JSON file...")
+#with open("settings.json", "r") as f:
+#    settings = json.load(f)
+    
+    
+all_settings = load_settings_separately('settings.json', 'settings_multi_domain.json')
+settings = all_settings['settings']
+settings_multi_domain = all_settings['settings_multi_domain']
 
 
 

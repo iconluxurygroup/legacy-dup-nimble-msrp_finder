@@ -1,516 +1,331 @@
 {
   "brand_rules": [
     {
-      "names": [
-          "AMCQ",
-          "Alexander McQueen"
-      ],
+      "names": ["AMCQ", "Alexander McQueen"],
+      "uid": " ",
       "full_name": "Alexander McQueen",
       "version": "1.0",
       "last_updated": "2023-10-13",
       "is_active": true,
       "sku_format": {
-        "base": { "article" : ["6"] , "model" : ["5"]
-    
-    },
-          "base_separator": "None",
-          "color_extension": [
-              "4"
-          ],
-          "color_separator": "None"
+        "base": { "article": ["6"], "model": ["5"] },
+        "base_separator": "None",
+        "color_extension": ["4"],
+        "color_separator": "None"
       },
       "expected_length": {
-          "base": [
-              11
-          ],
-          "with_color": [
-              15
-          ]
+        "base": [11],
+        "with_color": [15]
       },
       "fallback_format": "base",
-      "domain_hierarchy": [
-          "alexandermcqueen.com/en-us"
-      ],
+      "domain_hierarchy": ["alexandermcqueen.com/en-us"],
+      "delay": " ",
       "comments": "Standard format with optional color extension",
-      "example_sku": [
-          "553770WHGP01000"
-      ]
-  }
-  ,{
-      "names": [
-          "YSL",
-          "Saint Laurent",
-          "Yves Saint Laurent"
-      ],
+      "example_sku": ["553770WHGP01000"]
+    },
+    {
+      "names": ["YSL", "Saint Laurent", "Yves Saint Laurent"],
+      "uid": " ",
       "full_name": "Saint Laurent",
       "version": "1.0",
       "last_updated": "2023-10-23",
       "is_active": true,
       "sku_format": {
-        "base": { "article" : ["6"] , "model" : ["5"]
-    
-    },
-          "base_separator": "None",
-          "color_extension": [
-              "4"
-          ],
-          "color_separator": "None"
+        "base": { "article": ["6"], "model": ["5"] },
+        "base_separator": "None",
+        "color_extension": ["4"],
+        "color_separator": "None"
       },
       "expected_length": {
-          "base": [
-              11
-          ],
-          "with_color": [
-              15
-          ]
+        "base": [11],
+        "with_color": [15]
       },
       "fallback_format": "base",
-      "domain_hierarchy": [
-          "ysl.com/en-us"
-      ],
+      "domain_hierarchy": ["ysl.com/en-us"],
+      "delay": " ",
       "comments": "Standard format with optional color extension",
-      "example_sku": [
-          "494699FAB6Q3346"
-      ]
-  }
-   
-  ,{
-      "names":["Balenci", "Balenciaga","BAL"],
+      "example_sku": ["494699FAB6Q3346"]
+    },
+
+    {
+      "names": ["Balenci", "Balenciaga", "BAL"],
+      "uid": " ",
       "full_name": "Balenciaga",
       "version": "1.0",
       "last_updated": "2023-10-13",
       "is_active": true,
       "sku_format": {
-          "base": { "article" : ["6"] , "model" : ["5"]
-    
-        },
-          "base_separator": "None",
-          "color_extension": [
-              "4"
-          ],
-          "color_separator": "None"
+        "base": { "article": ["6"], "model": ["5"] },
+        "base_separator": "None",
+        "color_extension": ["4"],
+        "color_separator": "None"
       },
       "expected_length": {
-          "base": [
-              11
-          ],
-          "with_color": [
-              15
-          ]
+        "base": [11],
+        "with_color": [15]
       },
       "fallback_format": "base",
-      "domain_hierarchy": [
-          "balenciaga.com/en-us"
-      ],
+      "domain_hierarchy": ["balenciaga.com/en-us"],
+      "delay": " ",
       "comments": "Standard format with optional color extension",
-      "example_sku": [
-          "6713091VGUY5634"
-      ]
-  }
-    ,
-   {
-      "names": ["BV", "Bottega Veneta","Bottega"],
+      "example_sku": ["6713091VGUY5634"]
+    },
+    {
+      "names": ["BV", "Bottega Veneta", "Bottega"],
+      "uid": " ",
       "full_name": "Bottega Veneta",
       "version": "1.0",
       "last_updated": "2023-10-13",
       "is_active": true,
       "sku_format": {
-          "base": { "article" : ["6"] , "model" : ["5"]
-    
-        },
-          "base_separator": "None",
-          "color_extension": [
-              "4"
-          ],
-          "color_separator": "None"
+        "base": { "article": ["6"], "model": ["5"] },
+        "base_separator": "None",
+        "color_extension": ["4"],
+        "color_separator": "None"
       },
       "expected_length": {
-          "base": [
-              11
-          ],
-          "with_color": [
-              15
-          ]
+        "base": [11],
+        "with_color": [15]
       },
       "fallback_format": "base",
-      "domain_hierarchy": [
-          "bottegaveneta.com/en-us"
-      ],
+      "domain_hierarchy": ["bottegaveneta.com/en-us"],
+      "delay": " ",
       "comments": "Standard format with optional color extension",
-      "example_sku": [
-          "709417V2WG18101"
-      ]
-  }
-    ,
+      "example_sku": ["709417V2WG18101"]
+    },
     {
-      "names": [
-          "GIV",
-          "Givenchy"
-      ],
+      "names": ["GIV", "Givenchy"],
+      "uid": " ",
       "full_name": "Givenchy",
       "version": "1.0",
       "last_updated": "2023-10-13",
       "is_active": true,
       "sku_format": {
-          "base": { "article" : ["5"] , "model" : ["5"]
-    
-        },
-          "base_separator": "None",
-          "color_extension": [
-              "3"
-          ],
-          "color_separator": "-"
+        "base": { "article": ["5"], "model": ["5"] },
+        "base_separator": "None",
+        "color_extension": ["3"],
+        "color_separator": "-"
       },
       "expected_length": {
-          "base": [
-              10
-          ],
-          "with_color": [
-              14
-          ]
+        "base": [10],
+        "with_color": [14]
       },
       "fallback_format": "base",
-      "domain_hierarchy": [
-          "givenchy.com/us/"
-      ],
+      "domain_hierarchy": ["givenchy.com/us/"],
+      "delay": " ",
       "comments": "Color extension is optional and separated by a hyphen",
-      "example_sku": [
-          "BB05114012-001"
-      ]
-  },
-  {
-    "names": [
-        "Gucci"
-    ],
-    "full_name": "Gucci",
-    "version": "1.0",
-    "last_updated": "2023-10-13",
-    "is_active": true,
-    "sku_format": {
-        "base": { "article" : ["6"] , "model" : ["5"]
-    
+      "example_sku": ["BB05114012-001"]
     },
-        "base_separator": " ",
-        "color_extension": [
-            "4"
-        ],
-        "color_separator": " "
-    },
-    "expected_length": {
-        "base": [
-            12
-        ],
-        "with_color": [
-            17
-        ]
-    },
-    "fallback_format": "base",
-    "domain_hierarchy": [
-        "gucci.com/us/en/"
-    ],
-    "comments": "Color extension is optional and separated by a space",
-    "example_sku": [
-        "745718 FACCQ 8443"
-    ]
-}
-
-,
-
-{
-    "names": [
-        "Moncler","MONCLER"
-    ],
-    "full_name": "Moncler",
-    "version": "1.0",
-    "last_updated": "2023-10-25",
-    "is_active": true,
-    "sku_format": {
-        "base": { "article" : ["12"] , "model" : ["5"]
-          }
-        ,
-        "base_separator": "None",
-        "color_extension": [
-            "3"
-        ],
-        "color_separator": "None"
-    },
-    "expected_length": {
-        "base": [
-            17
-        ],
-        "with_color": [
-            20
-        ]
-    },
-    "fallback_format": "base",
-    "domain_hierarchy": [
-        "moncler.com/en-us/"
-    ],
-    "comments": "Standard format",
-    "example_sku": [
-        "I20988G00002899ZB52X"
-    ]
-  }
-,
     {
-      "names": [
-          "Dolce",
-          "DG",
-          "Dolce & Gabbana",
-          "Dolce Gabbana"
-      ],
+      "names": ["Gucci"],
+      "uid": " ",
+      "full_name": "Gucci",
+      "version": "1.0",
+      "last_updated": "2023-10-13",
+      "is_active": true,
+      "sku_format": {
+        "base": { "article": ["6"], "model": ["5"] },
+        "base_separator": " ",
+        "color_extension": ["4"],
+        "color_separator": " "
+      },
+      "expected_length": {
+        "base": [12],
+        "with_color": [17]
+      },
+      "fallback_format": "base",
+      "domain_hierarchy": ["gucci.com/us/en/"],
+      "delay": " ",
+      "comments": "Color extension is optional and separated by a space",
+      "example_sku": ["745718 FACCQ 8443"]
+    },
+
+    {
+      "names": ["Moncler", "MONCLER"],
+      "uid": " ",
+      "full_name": "Moncler",
+      "version": "1.0",
+      "last_updated": "2023-10-25",
+      "is_active": true,
+      "sku_format": {
+        "base": { "article": ["12"], "model": ["5"] },
+        "base_separator": "None",
+        "color_extension": ["3"],
+        "color_separator": "None"
+      },
+      "expected_length": {
+        "base": [17],
+        "with_color": [20]
+      },
+      "fallback_format": "base",
+      "domain_hierarchy": ["moncler.com/en-us/"],
+      "delay": true,
+      "comments": "Standard format",
+      "example_sku": ["I20988G00002899ZB52X"]
+    },
+    {
+      "names": ["Dolce", "DG", "Dolce & Gabbana", "Dolce Gabbana"],
+      "uid": " ",
       "full_name": "Dolce & Gabbana",
       "version": "1.0",
       "last_updated": "2023-10-25",
       "is_active": true,
       "sku_format": {
-        "base": { "article" : ["6"] , "model" : ["5"]
-    
-    },
-          "base_separator": "None",
-          "color_extension": [
-              "5"
-          ],
-          "color_separator": "None"
+        "base": { "article": ["6"], "model": ["5"] },
+        "base_separator": "None",
+        "color_extension": ["5"],
+        "color_separator": "None"
       },
       "expected_length": {
-          "base": [
-              11
-          ],
-          "with_color": [
-              16
-          ]
+        "base": [11],
+        "with_color": [16]
       },
       "fallback_format": "base",
-      "domain_hierarchy": [
-          "us.dolcegabbana.com/"
-      ],
+      "domain_hierarchy": ["dolcegabbana.com/en-us"],
+      "delay": true,
       "comments": "Standard format with optional color extension",
-      "example_sku": [
-          "FTAIADG8JZ6S9001"
-      ]
-  }
-  ,
-  {
-    "names": [
-        "Loewe","LOEWE"
-    ],
-    "full_name": "Loewe",
-    "version": "1.0",
-    "last_updated": "2023-10-25",
-    "is_active": true,
-    "sku_format": {
-      "base": { "article" : ["5"] , "model" : ["5"]
-  
-  },
+      "example_sku": ["FTAIADG8JZ6S9001"]
+    },
+    {
+      "names": ["Loewe", "LOEWE"],
+      "uid": " ",
+      "full_name": "Loewe",
+      "version": "1.0",
+      "last_updated": "2023-10-25",
+      "is_active": true,
+      "sku_format": {
+        "base": { "article": ["5"], "model": ["5"] },
         "base_separator": "None",
-        "color_extension": [
-            "4"
-        ],
+        "color_extension": ["4"],
         "color_separator": "-"
+      },
+      "expected_length": {
+        "base": [10],
+        "with_color": [15]
+      },
+      "fallback_format": "base",
+      "domain_hierarchy": ["loewe.com/usa/en/"],
+      "delay": " ",
+      "comments": "Standard format with optional color extension",
+      "example_sku": ["S540Y01X78-1100"]
     },
-    "expected_length": {
-        "base": [
-            10
-        ],
-        "with_color": [
-            15
-        ]
-    },
-    "fallback_format": "base",
-    "domain_hierarchy": [
-        "loewe.com/usa/en/"
-    ],
-    "comments": "Standard format with optional color extension",
-    "example_sku": [
-        "S540Y01X78-1100"
-    ]
-}
-,
-
-{
-    "names": [
-        "Veja"
-    ],
-    "full_name": "Veja",
-    "version": "1.0",
-    "last_updated": "2023-10-31",
-    "is_active": true,
-    "sku_format": {
-      "base": { "article" : ["5"] , "model" : ["4"]
-  
-  },
+    {
+      "names": ["Veja"],
+      "uid": " ",
+      "full_name": "Veja",
+      "version": "1.0",
+      "last_updated": "2023-10-31",
+      "is_active": true,
+      "sku_format": {
+        "base": { "article": ["5"], "model": ["4"] },
         "base_separator": "None",
-        "color_extension": [
-            "1"
-        ],
+        "color_extension": ["1"],
         "color_separator": "None"
+      },
+      "expected_length": {
+        "base": [9],
+        "with_color": [10]
+      },
+      "fallback_format": "base",
+      "domain_hierarchy": ["veja-store.com/en_us/"],
+      "retry": "",
+      "delay": " ",
+      "comments": "9 or 10 characters",
+      "example_sku": ["CL0102500A"]
     },
-    "expected_length": {
-        "base": [
-            9
-        ],
-        "with_color": [
-            10
-        ]
-    },
-    "fallback_format": "base",
-    "domain_hierarchy": [
-        "veja-store.com/en_us/"
-    ],
-    "retry":"",
-    "comments": "9 or 10 characters",
-    "example_sku": [
-        "CL0102500A"
-    ]
-}
-,
-{
-    "names": [
-        "Marc Jacobs"
-    ],
-    "full_name": "Marc Jacobs",
-    "version": "1.0",
-    "last_updated": "2023-10-31",
-    "is_active": true,
-    "sku_format": {
-      "base": { "article" : ["6"] , "model" : ["6"]
-  
-  },
+    {
+      "names": ["Marc Jacobs"],
+      "uid": " ",
+      "full_name": "Marc Jacobs",
+      "version": "1.0",
+      "last_updated": "2023-10-31",
+      "is_active": true,
+      "sku_format": {
+        "base": { "article": ["6"], "model": ["6"] },
         "base_separator": "None",
-        "color_extension": [
-            "3"
-        ],
+        "color_extension": ["3"],
         "color_separator": "None"
+      },
+      "expected_length": {
+        "base": [11],
+        "with_color": [14]
+      },
+      "fallback_format": "base",
+      "domain_hierarchy": ["marcjacobs.com/default"],
+      "retry": "",
+      "delay": " ",
+      "comments": "Color Unclear",
+      "example_sku": ["2F3HSC053H01"]
     },
-    "expected_length": {
-        "base": [
-            11
-        ],
-        "with_color": [
-            14
-        ]
+    {
+      "names": ["Versace", "VERSACE"],
+      "uid": " ",
+      "full_name": "Versace",
+      "version": "1.0",
+      "last_updated": "2023-10-25",
+      "is_active": true,
+      "sku_format": {
+        "base": { "article": ["7"], "model": ["7"] },
+        "base_separator": "-",
+        "color_extension": ["5"],
+        "color_separator": "_"
+      },
+      "expected_length": {
+        "base": [15],
+        "with_color": [21]
+      },
+      "fallback_format": "base",
+      "domain_hierarchy": ["versace.com/us/en/"],
+      "delay": " ",
+      "comments": "Standard format @Incomplete COLOR CODES DIF CHAR LENGTHS",
+      "example_sku": ["1008124-1A07977_2N240"]
     },
-    "fallback_format": "base",
-    "domain_hierarchy": [
-        "marcjacobs.com/default"
-    ],
-    "retry":"",
-    "comments": "Color Unclear",
-    "example_sku": [
-        "2F3HSC053H01"
-    ]
-}
-,
-{
-  "names": [
-      "Versace","VERSACE"
-  ],
-  "full_name": "Versace",
-  "version": "1.0",
-  "last_updated": "2023-10-25",
-  "is_active": true,
-  "sku_format": {
-    "base": { "article" : ["7"] , "model" : ["7"]
 
-},
-      "base_separator": "-",
-      "color_extension": [
-          "5"
-      ],
-      "color_separator": "_"
-  },
-  "expected_length": {
-      "base": [
-          15
-      ],
-      "with_color": [
-          21
-      ]
-  },
-  "fallback_format": "base",
-  "domain_hierarchy": [
-      "versace.com/us/en/"
-  ],
-  "comments": "Standard format @Incomplete COLOR CODES DIF CHAR LENGTHS",
-  "example_sku": [
-      "1008124-1A07977_2N240"
-  ]
-}
-
-,
-
-{
-  "names": [
-      "Burberry","Burb","BURBERRY"
-  ],
-  "full_name": "Burberry",
-  "version": "1.0",
-  "last_updated": "2023-10-25",
-  "is_active": true,
-  "sku_format": {
-      "base": { "article" : ["4"] , "model" : ["4"]
-  
-  },
-      "base_separator": "",
-      "color_extension": [
-          "0"
-      ],
-      "color_separator": "None"
-  },
-  "expected_length": {
-      "base": [
-          8
-      ],
-      "with_color": [
-          8
-      ]
-  },
-  "fallback_format": "base",
-  "domain_hierarchy": [
-      "us.burberry.com"
-  ],
-  "comments": "@Incomplete Need to add sku validation",
-  "example_sku": [
-      "80700921"
-  ]
-}
-  ,
-{
-  "names": [
-      "Jacquemus"
-  ],
-  "full_name": "Jacquemus",
-  "version": "1.0",
-  "last_updated": "2023-10-13",
-  "is_active": true,
-  "sku_format": {
-      "base": { "article" : ["8"] , "model" : ["4"]
-        }
-      ,
-      "base_separator": "-",
-      "color_extension": [
-          "3"
-      ],
-      "color_separator": "-"
-  },
-  "expected_length": {
-      "base": [
-          13
-      ],
-      "with_color": [
-          17
-      ]
-  },
-  "fallback_format": "base",
-  "domain_hierarchy": [
-      "jacquemus.com/en_us/"
-  ],
-  "comments": "Color extension is optional and separated by a hyphen",
-  "example_sku": [
-      "213BA006-3000-990"
-  ]
-}
-    
+    {
+      "names": ["Burberry", "Burb", "BURBERRY"],
+      "uid": " ",
+      "full_name": "Burberry",
+      "version": "1.0",
+      "last_updated": "2023-10-25",
+      "is_active": true,
+      "sku_format": {
+        "base": { "article": ["4"], "model": ["4"] },
+        "base_separator": "",
+        "color_extension": ["0"],
+        "color_separator": "None"
+      },
+      "expected_length": {
+        "base": [8],
+        "with_color": [8]
+      },
+      "fallback_format": "base",
+      "domain_hierarchy": ["us.burberry.com"],
+      "delay": " ",
+      "comments": "@Incomplete Need to add sku validation",
+      "example_sku": ["80700921"]
+    },
+    {
+      "names": ["Jacquemus"],
+      "uid": " ",
+      "full_name": "Jacquemus",
+      "version": "1.0",
+      "last_updated": "2023-10-13",
+      "is_active": true,
+      "sku_format": {
+        "base": { "article": ["8"], "model": ["4"] },
+        "base_separator": "-",
+        "color_extension": ["3"],
+        "color_separator": "-"
+      },
+      "expected_length": {
+        "base": [13],
+        "with_color": [17]
+      },
+      "fallback_format": "base",
+      "domain_hierarchy": ["jacquemus.com/en_us/"],
+      "delay": " ",
+      "comments": "Color extension is optional and separated by a hyphen",
+      "example_sku": ["213BA006-3000-990"]
+    }
   ]
 }
