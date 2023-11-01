@@ -586,7 +586,10 @@ def process_product_ids(product_id, brand_name): #,error_log_file="error_ids.txt
             
             if parsed_data:
             # Write the parsed data to the master JSON file
-                clean_result = prepare_export(parsed_data)
+                parsed_data = str(parsed_data).replace("'",'"')
+                print(parsed_data)
+                #!clean_result = prepare_export(parsed_data)
+                clean_result = validate_sku(parsed_data)
                 print(clean_result)
                 return clean_result
                 #write_to_master_json(parsed_data, product_id, query)
@@ -673,6 +676,105 @@ settings_multi_domain = {
 
 
 
+def validate_sku(response):
+    try:
+        ex = json.loads(str(response))
+    except Exception as e:
+        logging.debug(str(e))
+        print(e)
+        return "Failed loading schema"
+    
+    
+
+    #print("______________________________________________________________")
+    #print(json.dumps(ex, indent=4))
+    #print("--------------------------------------------------------------")
+    if "@type" in ex:
+        valP = ex['@type']
+        if valP == 'Product':
+            try:
+                valUrl = ex['mainEntityOfPage']
+            except:
+                try:
+                    valUrl = ex['url']
+                except:
+                    valUrl = False
+            try:    
+                valSKu = ex['sku']                   
+            except: 
+                valSKu = False   
+            try:       
+                valPrice = ex['price']                  
+            except:
+                valPrice = False
+            try:    
+                valCur = ex['priceCurrency']         
+            except:
+                valCur = False
+            try:    
+                valImg= ex['image']         
+            except:
+                valImg = "Image not found"
+            try:    
+                valName = ex['name']         
+            except:
+                valName = "Product name not found"
+            try:    
+                valDec= ex['description']         
+            except:
+                valDec = "Product description not found"
+            
+            if valPrice == False and valCur == False:
+                if "offers" in ex:
+
+                    valOffer = ex['offers']
+                    
+
+
+                    #!!!! PRINT PRETTY
+                    #formatprint = str(valOffer).replace("'",'"')
+                    #formatprint = json.loads(formatprint)
+                    #print("______________________________________________________________")
+                    #print(json.dumps(formatprint, indent=4))
+                    #print("--------------------------------------------------------------")  
+
+                    #!!!! PRINT PRETTY
+                    if "@type" in valOffer:
+
+                        typeOffer = valOffer['@type']
+
+                        if typeOffer == "Offer":
+                            try:       
+                                valPrice = valOffer['price']                  
+                            except:
+                                valPrice = False
+                            try:    
+                                valCur = valOffer['priceCurrency']         
+                            except:
+                                valCur = False
+                            if valImg == "Image not found":    
+                                try:    
+                                    valImg = valOffer['image']         
+                                except:
+                                    valImg = "Image not found"   
+
+                            if valUrl == False:
+                                try:
+                                    valUrl = valOffer['mainEntityOfPage']
+                                except:
+                                    try:
+                                        valUrl = valOffer['url']
+                                    except:
+                                        valUrl = False
+                                
+                            if valPrice == False or valCur == False:
+                                print("Price coult not be found")
+                                logging.debug("Price could not be found")
+                
+            logging.debug([valSKu,valUrl,valPrice,valCur,valImg,valName,valDec])
+            return [valSKu,valUrl,valPrice,valCur,valImg,valName,valDec]
+
+
 def assign_poland_columns(poland_df):
     product_id_column = poland_df['ID']
     brand_column = poland_df['Brand']
@@ -685,6 +787,10 @@ sample_file_path = 'poland_export_for_retail.txt'
 df_test = read_tsv_file(sample_file_path)
 poland_df = read_poland_export(sample_file_path)
 poland_columns = assign_poland_columns(poland_df)
+
+
+
+
 
 
 def prep_for_return(poland_p_id,brand_name,product_id,color,result):
@@ -716,4 +822,3 @@ for poland_row in range(len(poland_df)):
     #result = "test"
     formatted_return = prep_for_return(poland_p_id,brand_name,product_id,color,proccessed_row)
     write_to_file("output.txt",formatted_return)
-
