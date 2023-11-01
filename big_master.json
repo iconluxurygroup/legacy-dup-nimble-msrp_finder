@@ -1,0 +1,152 @@
+{
+    "741911 Y76BR4104": {
+        "parsed_data": {
+            "@context": "http://schema.org",
+            "@type": "Product",
+            "mainEntityOfPage": "https://www.ysl.com/en-us/long-dress-in-knit-741911Y76BR4104.html",
+            "name": "long dress in knit",
+            "color": "BLEU NUIT",
+            "material": "",
+            "sku": "741911Y76BR4104",
+            "image": "https://saint-laurent.dam.kering.com/m/7db5022b34a65c6c/eCom-741911Y76BR4104_A.jpg?v=3",
+            "description": "Fitted dress made with responsible viscose, with high neck and front stitch.<br><br>This dress comes in a protective box.<br>Remember not to hang it up, instead store in its box to retain its original shape.",
+            "url": "https://www.ysl.com/en-us/long-dress-in-knit-741911Y76BR4104.html",
+            "brand": {
+                "@type": "Brand",
+                "name": "SAINT LAURENT"
+            },
+            "offers": {
+                "@type": "Offer",
+                "url": "https://www.ysl.com/en-us/long-dress-in-knit-741911Y76BR4104.html",
+                "priceCurrency": "USD",
+                "price": "3490.00",
+                "availability": "http://schema.org/InStock",
+                "seller": {
+                    "@type": "Organization",
+                    "name": "SAINT LAURENT"
+                }
+            }
+        },
+        "original_search_query": "site:ysl.com/en-us \"741911Y76BR4104\""
+    },
+    "718894 TL01S1000": {
+        "parsed_data": {
+            "@context": "http://schema.org",
+            "@type": "Product",
+            "mainEntityOfPage": "https://www.balenciaga.com/en-us/bb-icon-hair-tie--black-811010843.html",
+            "name": "bb icon hair tie ",
+            "color": "BLACK",
+            "material": "",
+            "sku": "811010843",
+            "image": "https://balenciaga.dam.kering.com/m/321ee311e026c5c8/eCom-718894TL01S1000_F.jpg?v=1",
+            "description": "BB Icon Hair Tie in black polyamide and elastane and antique silver brass ",
+            "url": "https://www.balenciaga.com/en-us/bb-icon-hair-tie--black-811010843.html",
+            "brand": {
+                "@type": "Brand",
+                "name": "Balenciaga"
+            },
+            "offers": {
+                "@type": "Offer",
+                "url": "https://www.balenciaga.com/en-us/bb-icon-hair-tie--black-811010843.html",
+                "priceCurrency": "USD",
+                "price": "250.00",
+                "availability": "http://schema.org/OutOfStock",
+                "seller": {
+                    "@type": "Organization",
+                    "name": "Balenciaga"
+                }
+            }
+        },
+        "original_search_query": "site:balenciaga.com/en-us \"718894TL01S1000\""
+    },
+    "733830 V0EY05830": {
+        "parsed_data": {
+            "@context": "http://schema.org",
+            "@type": "Product",
+            "mainEntityOfPage": "https://www.bottegaveneta.com/en-us/iphone-14-pro-case-on-strap-ribbon-811199641.html",
+            "name": "Iphone 14 Pro Case On Strap",
+            "color": "RIBBON",
+            "material": "",
+            "sku": "811199641",
+            "image": "https://bottega-veneta.dam.kering.com/m/2faddd0be78329a0/eCom-733830V0EY05830_A.jpg?v=1",
+            "description": "• Intreccio rubber silicone iPhone 14 Pro case<br>• Detachable rubber strap",
+            "url": "https://www.bottegaveneta.com/en-us/iphone-14-pro-case-on-strap-ribbon-811199641.html",
+            "brand": {
+                "@type": "Brand",
+                "name": "Bottega Veneta"
+            },
+            "offers": {
+                "@type": "Offer",
+                "url": "https://www.bottegaveneta.com/en-us/iphone-14-pro-case-on-strap-ribbon-811199641.html",
+                "priceCurrency": "USD",
+                "price": "300.00",
+                "availability": "http://schema.org/InStock",
+                "seller": {
+                    "@type": "Organization",
+                    "name": "Bottega Veneta"
+                }
+            }
+        },
+        "original_search_query": "site:bottegaveneta.com/en-us \"733830V0EY05830\""
+    },
+    "733842 V0EY04224": {
+        "parsed_data": {
+            "@context": "http://schema.org",
+            "@type": "Product",
+            "mainEntityOfPage": "https://www.bottegaveneta.com/en-us/iphone-14-pro-case-surf-812903768.html",
+            "name": "Iphone 14 Pro Case",
+            "color": "SURF",
+            "material": "",
+            "sku": "812903768",
+            "image": "https://bottega-veneta.dam.kering.com/m/572ec45bb06bf629/eCom-733842V0EY04224_A.jpg?v=3",
+            "description": "• Intreccio rubber silicone iPhone 14 Pro case ",
+            "url": "https://www.bottegaveneta.com/en-us/iphone-14-pro-case-surf-812903768.html",
+            "brand": {
+                "@type": "Brand",
+                "name": "Bottega Veneta"
+            },
+            "offers": {
+                "@type": "Offer",
+                "url": "https://www.bottegaveneta.com/en-us/iphone-14-pro-case-surf-812903768.html",
+                "priceCurrency": "USD",
+                "price": "250.00",
+                "availability": "http://schema.org/InStock",
+                "seller": {
+                    "@type": "Organization",
+                    "name": "Bottega Veneta"
+                }
+            }
+        },
+        "original_search_query": "site:bottegaveneta.com/en-us \"733842V0EY04224\""
+    },
+    "736230 1AAP51091": {
+        "parsed_data": {
+            "@context": "http://schema.org",
+            "@type": "Product",
+            "mainEntityOfPage": "https://www.alexandermcqueen.com/en-us/red-orchid-card-holder-813129958.html",
+            "name": "Red Orchid Card Holder",
+            "color": "Black/Lust Red",
+            "material": "",
+            "sku": "813129958",
+            "image": "https://amq-mcq.dam.kering.com/m/6c41b4e13c750bc2/eCom-7362301AAP51091_F.jpg?v=1",
+            "description": "Black calfskin leather card holder featuring an engineered Red Orchid print and finished with an Alexander McQueen signature. The card holder features one central compartment and four credit card slots.",
+            "url": "https://www.alexandermcqueen.com/en-us/red-orchid-card-holder-813129958.html",
+            "brand": {
+                "@type": "Brand",
+                "name": "Alexander McQueen"
+            },
+            "offers": {
+                "@type": "Offer",
+                "url": "https://www.alexandermcqueen.com/en-us/red-orchid-card-holder-813129958.html",
+                "priceCurrency": "USD",
+                "price": "220.00",
+                "availability": "http://schema.org/InStock",
+                "seller": {
+                    "@type": "Organization",
+                    "name": "Alexander McQueen"
+                }
+            }
+        },
+        "original_search_query": "site:alexandermcqueen.com/en-us \"7362301AAP51091\""
+    }
+}

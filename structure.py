@@ -5,6 +5,8 @@ import json
 import os
 import logging
 import time
+import pandas as pd
+from io import StringIO
 DEBUG = False
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
@@ -13,6 +15,24 @@ logging.basicConfig(level=logging.INFO)
 logging.info("Loading settings from JSON file...")
 with open("settings.json", "r") as f:
     settings = json.load(f)
+    
+# Function to read any TSV (Tab-separated values) file and return its DataFrame
+def read_tsv_file(filename: str) -> pd.DataFrame:
+    try:
+        df = pd.read_csv(filename, delimiter='\t', encoding='utf-8')
+        return df
+    except Exception as e:
+        return str(e)
+
+# Function to read the specific 'poland_export_for_retail.txt' file and return its columns
+def read_poland_export(filename: str) -> list:
+    try:
+        df = pd.read_csv(filename, delimiter='\t', encoding='utf-8')
+        return df
+    except Exception as e:
+        return str(e)
+
+
 
 def find_brand_rules(brand_name):
     logging.info(f"Searching for brand rules for {brand_name}...")
@@ -278,7 +298,7 @@ def parse_SERP(html_content):
 
 def write_to_file(file_name, text):
     try:
-        with open(file_name, 'w', encoding="utf-8") as file:
+        with open(file_name, 'a', encoding="utf-8") as file:
             file.write(text)
         print(f'Successfully wrote to {file_name}')
     except Exception as e:
@@ -521,75 +541,71 @@ def load_brand_names(filename):
         brand_names = [line.strip() for line in file.readlines()]
     return brand_names
 
-def process_product_ids(product_ids_file, brand_name_file,error_log_file="error_ids.txt"):
-    """
-    Process a list of product IDs: create search queries, search on Google, parse results, and save to JSON.
 
-    :param product_ids_file: Path to the text file containing the product IDs.
-    :param domain: The domain to be used in the search queries.
-    :return: None
-    """
-    product_ids = load_product_ids(product_ids_file)
-    error_ids = []
-    
-    brand_names = load_brand_names(brand_name_file)
-    
 
-    for index,product_id in enumerate(product_ids):
-        try:
-            # Create the search query       
-            formatted_sku = handle_brand_sku(product_id, brand_names[index])#DO NOT LEAVE GUCCI HARDCODED
-            brand_rule = find_brand_rules(brand_names[index])
-            if not brand_rule:
-                logging.error("Brand not found")
-                return "Brand not found"
-            domain = brand_rule['domain_hierarchy'][0]
+
+
+
+def prepare_export(result_object):
+    if result_object:
+        if result_object['parsed_data']:
+            if result_object['parsed_data']['offers']:
+                price = result_object['parsed_data']['offers']['price']
+                return price
             
-            print(f'{brand_names[index]} {formatted_sku} {domain}')
             
-            query = f'site:{domain} "{formatted_sku}"'
+            
+        
 
-            # Perform the Google search
-            response = google_search(query)
-            results = parse_SERP(response.text)
-            print(results)
-            # Filter and prioritize the results
-            filtered_results = filter_and_prioritize_SERP(results, product_id=formatted_sku)#, currency='us')##FORMATED SKU OR PRODUCTID??
+def process_product_ids(product_id, brand_name): #,error_log_file="error_ids.txt"):
+    try:
+        # Create the search query       
+        formatted_sku = handle_brand_sku(product_id, brand_name)#DO NOT LEAVE GUCCI HARDCODED      
+        brand_rule = find_brand_rules(brand_name)
+        if not brand_rule:
+            logging.error("Brand not found")
+            #write_to_file(error_log_file,f'{product_id}\n')
+            return "Brand not found"
+        domain = brand_rule['domain_hierarchy'][0]
+        
+        print(f'{brand_name} {formatted_sku} {domain}')
+        
+        query = f'site:{domain} "{formatted_sku}"'
+        # Perform the Google search
+        response = google_search(query)
+        results = parse_SERP(response.text)
+        print(results)
+        # Filter and prioritize the results
+        filtered_results = filter_and_prioritize_SERP(results, product_id=formatted_sku)#, currency='us')##FORMATED SKU OR PRODUCTID??
+        # Extract the target URL and get its content
+        Target_URL = extract_url_from_string(str(filtered_results))
+        if Target_URL:
+            target_body = go_to_target(Target_URL).text
+            # Parse the target page content
+            parsed_data = universal_parser(target_body, settings_multi_domain, domain)
+            
+            if parsed_data:
+            # Write the parsed data to the master JSON file
+                clean_result = prepare_export(parsed_data)
+                print(clean_result)
+                return clean_result
+                #write_to_master_json(parsed_data, product_id, query)
+            #else:
+                #cache_body = go_to_cache_results(Target_URL).text
+                #parsed_data = universal_parser(cache_body, settings_multi_domain, domain)
+                #write_to_master_json(parsed_data, product_id, query)
+        else:
+            print(f"URL not found for product ID: {formatted_sku}.")
+            return "URL not found"
+            #write_to_file(error_log_file,f'{product_id}\n')
+    except Exception as e:
+        print(f"Error processing product ID {formatted_sku}: {e}")
+        return e
+        #write_to_file(error_log_file,f'{product_id}\n')       
+             
 
-            # Extract the target URL and get its content
-            Target_URL = extract_url_from_string(str(filtered_results))
-            if Target_URL:
-                target_body = go_to_target(Target_URL).text
-
-                # Parse the target page content
-                parsed_data = universal_parser(target_body, settings_multi_domain, domain)
-                
-                if parsed_data:
-                # Write the parsed data to the master JSON file
-                    write_to_master_json(parsed_data, product_id, query)
-                else:
-                    #cache_body = go_to_cache_results(Target_URL).text
-                    #parsed_data = universal_parser(cache_body, settings_multi_domain, domain)
-                    write_to_master_json(parsed_data, product_id, query)
-
-            else:
-                print(f"URL not found for product ID: {formatted_sku}.")
-                error_ids.append(product_id)
-        except Exception as e:
-            print(f"Error processing product ID {formatted_sku}: {e}")
-            error_ids.append(product_id)       
-                 
-        # Write error IDs to the error log file
-    with open(error_log_file, 'w') as file:
-        for error_id in error_ids:
-            file.write(f"{error_id}\n")
 
     print("Processing completed.")
-
-
-
-
-
 
 
 
@@ -657,4 +673,47 @@ settings_multi_domain = {
 
 
 
-process_product_ids("ids.txt", "brands.txt")
+def assign_poland_columns(poland_df):
+    product_id_column = poland_df['ID']
+    brand_column = poland_df['Brand']
+    model_column = poland_df['Model']
+    color_column = poland_df['Color']
+    return product_id_column,brand_column,model_column,color_column
+
+# Test the functions with the sample file 'poland_export_for_retail.txt'
+sample_file_path = 'poland_export_for_retail.txt'
+df_test = read_tsv_file(sample_file_path)
+poland_df = read_poland_export(sample_file_path)
+poland_columns = assign_poland_columns(poland_df)
+
+
+def prep_for_return(poland_p_id,brand_name,product_id,color,result):
+    return (f'{poland_p_id}\t{brand_name}\t{product_id}\t{color}\t{result}\n')
+
+def remove_before_first_space(s):
+    return s.split(' ', 1)[-1]
+
+#print(poland_columns[0][0],poland_columns[1][0],poland_columns[2][0])
+
+
+for poland_row in range(len(poland_df)):
+    
+    poland_row = [poland_columns[0][poland_row],poland_columns[1][poland_row],poland_columns[2][poland_row],poland_columns[3][poland_row]]
+    
+    poland_p_id = poland_row[0]
+    brand_name = poland_row[1]
+    product_id = poland_row[2]
+    color = poland_row[3]
+    #Remove first part of poland model
+    clean_product_id = remove_before_first_space(product_id)
+    
+    product_id_color = clean_product_id + color
+    print(clean_product_id)
+    
+    
+    proccessed_row = process_product_ids(product_id_color,brand_name)
+    
+    #result = "test"
+    formatted_return = prep_for_return(poland_p_id,brand_name,product_id,color,proccessed_row)
+    write_to_file("output.txt",formatted_return)
+
