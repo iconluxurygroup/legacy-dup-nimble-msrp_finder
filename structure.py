@@ -93,7 +93,7 @@ def handle_brand_sku(sku, brand_name):
     logging.error("Invalid SKU format")
     return "Invalid SKU format"
 
-def go_to_target(Target_URL, max_retries=5):
+def go_to_target(Target_URL,settings,max_retries=5):
     """
     Fetch the contents of the target site and retry on specific error codes.
 
@@ -101,6 +101,11 @@ def go_to_target(Target_URL, max_retries=5):
     :param max_retries: Maximum number of retries before giving up.
     :return: The response.
     """
+
+    delay_settings = settings['delay']
+    
+    print(delay_settings)
+    
     url = "https://api.webit.live/api/v1/realtime/web"
     error_codes = [500, 501, 555]
     
@@ -109,29 +114,28 @@ def go_to_target(Target_URL, max_retries=5):
       "url": Target_URL,
       "format": "html",
       "render": True,
-      "country": "ALL",
+      "country": "US",
       "locale": "en",     
     })
-    
-    if "moncler" in Target_URL:
-        print("Enabling Delay for Moncler")
-        payload = json.dumps({
-      "parse": False,
-      "url": Target_URL,
-      "format": "html",
-      "render": True,
-      "country": "ALL",
-      "locale": "en",
-     "render_flow": [
-          {
-            "wait": {
-                "delay": 5000 ####ONLY FOR MONCLER FIGURE OUT LATER
-            }
+    #if delay_settings:
+        #print("Enabling Delay")
+        #payload = json.dumps({
+      #"parse": False,
+      #"url": Target_URL,
+      #"format": "html",
+      #"render": True,
+      #"country": "US",
+      #"locale": "en",     
+      # "render_flow": [
+       #   {
+       #     "wait": {
+       #         "delay": 10000 ####ONLY FOR MONCLER FIGURE OUT LATER
+        #    }
       
-      }]
-      , 
+      #}]
+    #  , 
       
-    })
+   # })
         
     headers = {
       'Content-Type': 'application/json',
@@ -165,7 +169,7 @@ def go_to_cache_results(Cache_URL, max_retries=5):
     :param max_retries: Maximum number of retries before giving up.
     :return: The response.
     """
-    Cache_URL = (f"cache:{Cache_URL}")
+    Cache_URL = (f"https://webcache.googleusercontent.com/search?q=cache:{Cache_URL}")
     print(Cache_URL)
     
     url = "https://api.webit.live/api/v1/realtime/web"
@@ -176,16 +180,8 @@ def go_to_cache_results(Cache_URL, max_retries=5):
       "url": Cache_URL,
       "format": "html",
       "render": True,
-      "country": "ALL",
+      "country": "US",
       "locale": "en",     
-       "render_flow": [
-          {
-            "wait": {
-                "delay": 5000 ####ONLY FOR MONCLER FIGURE OUT LATER
-            }
-      
-      }]
-      , 
       
     })
     
@@ -228,7 +224,7 @@ def google_search(query, max_retries=5):
       "url": "https://www.google.com/search?q=" + str(query),
       "format": "html",
       "render": False,
-      "country": "ALL",
+      "country": "US",
       "locale": "en"
     })
     headers = {
@@ -361,7 +357,11 @@ def extract_product_schema(html_content):
     for script in script_tags:
         try:
             schema_data = json.loads(script.string)
-            if schema_data.get('@type') == 'Product':
+            print("XXXXXXXX")
+            print(type(schema_data))
+            if isinstance(schema_data, list):
+                print(schema_data)
+            elif schema_data.get('@type') == 'Product':
                 return schema_data
         except json.JSONDecodeError:
             continue
@@ -385,8 +385,11 @@ def universal_parser(html_content, settings, domain):
     # If no settings for the domain, return an empty dictionary
     if not domain_settings:
         return {}
+    print("_________________")
     if domain_settings =="schema":
+        print("_________________1")
         extracted_data = extract_product_schema(html_content)
+        print("_________________2")
         return extracted_data
         
     soup = BeautifulSoup(html_content, 'html.parser')
@@ -580,7 +583,9 @@ def process_product_ids(product_id, brand_name): #,error_log_file="error_ids.txt
         # Extract the target URL and get its content
         Target_URL = extract_url_from_string(str(filtered_results))
         if Target_URL:
-            target_body = go_to_target(Target_URL).text
+            target_body = go_to_target(Target_URL,brand_rule).text
+            if DEBUG == True:
+                print(target_body)
             # Parse the target page content
             parsed_data = universal_parser(target_body, settings_multi_domain, domain)
             
@@ -593,10 +598,19 @@ def process_product_ids(product_id, brand_name): #,error_log_file="error_ids.txt
                 print(clean_result)
                 return clean_result
                 #write_to_master_json(parsed_data, product_id, query)
-            #else:
-                #cache_body = go_to_cache_results(Target_URL).text
-                #parsed_data = universal_parser(cache_body, settings_multi_domain, domain)
-                #write_to_master_json(parsed_data, product_id, query)
+            else:
+                cache_body = go_to_cache_results(Target_URL).text
+                print("Success Cache")
+                if DEBUG == True:
+                    write_to_file("DEBUG.txt", str(cache_body))
+                parsed_data = universal_parser(str(cache_body), settings_multi_domain, domain)
+                print("success")
+                parsed_data = str(parsed_data).replace("'",'"')
+                print(parsed_data)
+                #!clean_result = prepare_export(parsed_data)
+                clean_result = validate_sku(parsed_data)
+                print(clean_result)
+                return clean_result
         else:
             print(f"URL not found for product ID: {formatted_sku}.")
             return "URL not found"
@@ -668,10 +682,11 @@ settings_multi_domain = {
      "givenchy.com/us/": "schema",   
      "us.burberry.com" : "schema",   
      "moncler.com/en-us/" : "schema",
-     "us.dolcegabbana.com/" : "schema",
+     "dolcegabbana.com/en-us/" : "schema",
      "loewe.com/usa/en/" : "schema",
      "versace.com/us/en/" : "schema",
      "marcjacobs.com/default" : "schema",
+     "fendi.com/us-en/" : "schema",
 }
 
 
@@ -683,9 +698,6 @@ def validate_sku(response):
         logging.debug(str(e))
         print(e)
         return "Failed loading schema"
-    
-    
-
     #print("______________________________________________________________")
     #print(json.dumps(ex, indent=4))
     #print("--------------------------------------------------------------")
@@ -770,6 +782,7 @@ def validate_sku(response):
                             if valPrice == False or valCur == False:
                                 print("Price coult not be found")
                                 logging.debug("Price could not be found")
+                                return "Schema Price could not be found"
                 
             logging.debug([valSKu,valUrl,valPrice,valCur,valImg,valName,valDec])
             return [valSKu,valUrl,valPrice,valCur,valImg,valName,valDec]
@@ -783,7 +796,7 @@ def assign_poland_columns(poland_df):
     return product_id_column,brand_column,model_column,color_column
 
 # Test the functions with the sample file 'poland_export_for_retail.txt'
-sample_file_path = 'poland_export_for_retail.txt'
+sample_file_path = 'poland_fendi.txt'
 df_test = read_tsv_file(sample_file_path)
 poland_df = read_poland_export(sample_file_path)
 poland_columns = assign_poland_columns(poland_df)
@@ -821,4 +834,4 @@ for poland_row in range(len(poland_df)):
     
     #result = "test"
     formatted_return = prep_for_return(poland_p_id,brand_name,product_id,color,proccessed_row)
-    write_to_file("output.txt",formatted_return)
+    write_to_file("output2.txt",formatted_return)
